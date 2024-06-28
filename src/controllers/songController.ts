@@ -34,8 +34,34 @@ class SongController {
         }
     }
 
-    async show() {
+    async show(req: Request, res: Response) {
+        try {
+            const id: string = req.params.id
+            const song = await SongRepository.findById(id)
+            res.status(200).send(song)
+        } catch (err) {
+            res.status(400).send(err)
+        }
+    }
 
+    async update(req: Request, res: Response) {
+        try {
+            const id: string = req.params.id
+            const song = await SongRepository.update(req.body, id)
+            res.status(200).send(song)
+        } catch (err) {
+            res.status(400).send(err)
+        }
+    }
+
+    async delete(req: Request, res: Response) {
+        try {
+            const id: string = req.params.id
+            const song = await SongRepository.delete(id)
+            res.status(200).send(song)
+        } catch (err) {
+            res.status(400).send(err)
+        }
     }
 
 }

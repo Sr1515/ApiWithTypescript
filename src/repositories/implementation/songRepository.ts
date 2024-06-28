@@ -31,6 +31,34 @@ class SongRepository implements ISongRepository {
 
         return songs
     }
+
+    async findById(id: string): Promise<Song | null> {
+          const song: Song | null = await prismaClient.song.findUnique({
+            where: {
+                id
+            }
+          }) as Song | null 
+          return song
+    }   
+    
+    async update(song: Song, id: string): Promise<void> {
+        await prismaClient.song.update({
+            where: {
+                id
+            }, 
+            data: {
+                ...song
+            }
+        })
+    }
+
+    async delete(id: string): Promise<void> {
+        await prismaClient.song.delete({
+            where: {
+                id
+            }
+        })
+    }
 }
 
 

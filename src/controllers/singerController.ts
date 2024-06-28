@@ -52,7 +52,7 @@ class SingerController {
     async delete(req: Request, res: Response) {
         try {
             const id: string = req.params.id
-            const singer = await SingerRepository.delete(req.params.id)
+            const singer = await SingerRepository.delete(id)
             res.status(200).send(singer)
         } catch (err) {
             res.status(400).send(err)
